@@ -23,8 +23,19 @@ jobs:
         url: ${{ fromJson(needs.init.outputs.urls_json) }}
     steps:
       - uses: actions/checkout@v2
-      - name: plop2
+      - name: Extract repositories
+        id: repositories
         run: |
           wget https://github.com/mikefarah/yq/releases/download/v4.7.0/yq_linux_amd64.tar.gz -O - | tar xz && sudo mv yq_linux_amd64 /usr/bin/yq
-          REPOS=$( yq e '.urls[] | select( .url == "${{ matrix.url }}" ) | .repositories | join(",") ' dashlord.yml )
+          REPOS=$( yq e '.urls[] | select( .url == "${{ matrix.url }}" ) | .repositories // [] | join(",") ' dashlord.yml )
           echo $REPOS
+          echo "::set-output name=REPOS::$REPOS"
+      - uses: "MTES-MCT/dependabotalerts-action@main"
+        with:
+          token: ${{ secrets.DEPENDABOTALERTS_TOKEN }}
+          repositories: "${{ steps.repositories.output.REPOS }}"
+          output: dependabotalerts.json
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dependabotalerts.json
+          path: dependabotalerts.json
