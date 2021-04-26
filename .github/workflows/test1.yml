@@ -33,11 +33,11 @@ jobs:
       - name: debug repositories
         run: |
           echo "REPOS"
-          echo "${{ steps.repositories.output.REPOS }}"
+          echo "${{ steps.repositories.outputs.REPOS }}"
       - uses: "MTES-MCT/dependabotalerts-action@main"
         with:
           token: ${{ secrets.DEPENDABOTALERTS_TOKEN }}
-          repositories: "${{ steps.repositories.output.REPOS }}"
+          repositories: "${{ steps.repositories.outputs.REPOS }}"
           output: dependabotalerts.json
       - uses: actions/upload-artifact@v2
         with:
