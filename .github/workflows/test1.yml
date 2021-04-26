@@ -30,6 +30,10 @@ jobs:
           REPOS=$( yq e '.urls[] | select( .url == "${{ matrix.url }}" ) | .repositories // [] | join(",") ' dashlord.yml )
           echo $REPOS
           echo "::set-output name=REPOS::$REPOS"
+      - name: debug repositories
+        run: |
+          echo "REPOS"
+          echo "${{ steps.repositories.output.REPOS }}"
       - uses: "MTES-MCT/dependabotalerts-action@main"
         with:
           token: ${{ secrets.DEPENDABOTALERTS_TOKEN }}
