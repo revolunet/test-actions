@@ -19,8 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       max-parallel: 3
-      matrix:
-        url: ${{ fromJson(needs.init.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.init.outputs.matrix) }}
     steps:
       - run: |
           echo ${{ matrix.url }}
