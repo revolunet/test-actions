@@ -12,14 +12,15 @@ jobs:
         run: |
           JSON='[{ "url": "https://blabla.com", "repositories": ["xxx/test1", "xxx/test2"] }, { "url": "https://pouet.com", "repositories": ["xxx/test3", "xxx/test4"] }]'
           echo ::set-output name=matrix::$JSON
-  
+      - uses: socialgouv/dashbord
   job1:
     runs-on: ubuntu-latest
     needs: init
     strategy:
       fail-fast: false
       max-parallel: 3
-      matrix: ${{ fromJson(needs.init.outputs.matrix) }}
+      matrix: 
+        url: ${{ fromJson(needs.init.outputs.matrix) }}
     steps:
       - run: |
-          echo ${{ matrix.url }}
+          echo ${{ fromJson(matrix.url) }}
