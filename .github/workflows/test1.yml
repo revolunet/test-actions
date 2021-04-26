@@ -36,7 +36,7 @@ jobs:
           echo "${{ steps.repositories.outputs.REPOS }}"
       - uses: "MTES-MCT/dependabotalerts-action@main"
         with:
-          token: ${{ secrets.DEPENDABOTALERTS_TOKEN }}
+          token: ${{ github.token }}
           repositories: "${{ steps.repositories.outputs.REPOS }}"
           output: dependabotalerts.json
       - uses: actions/upload-artifact@v2
