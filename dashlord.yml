@@ -3,5 +3,6 @@ urls:
   - url: https://www.fabrique.social.gouv.fr
     repositories:
       - socialgouv/socialgouv.github.io
+      - socialgouv/sample-next-app
   - url: https://beta.gouv.fr/
       - betagouv/beta.gouv.fr
