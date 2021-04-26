@@ -22,5 +22,7 @@ jobs:
         url: ${{ fromJson(needs.init.outputs.matrix) }}
     steps:
       - run: |
-          JSON=${{ matrix.url }}
-          echo ${{ fromJson( $JSON ) }}
+          JSON=${{ fromJSON(matrix.url) }}
+          echo $JSON
+          JSON2=${{ toJSON(matrix.url) }}
+          echo $JSON2
