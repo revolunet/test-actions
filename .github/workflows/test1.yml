@@ -24,4 +24,4 @@ jobs:
       - name: plop2
         run: |
           JSON2=${{ toJSON(matrix.url) }}
-          echo $JSON2
+          echo ${JSON2//'%'/'%25'}
