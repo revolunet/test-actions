@@ -9,7 +9,7 @@ jobs:
       matrix: ${{ steps.init.outputs.matrix }}
     steps:
       - id: init
-        script: |
+        run: |
           JSON='[{ "url": "https://blabla.com", "repositories": ["xxx/test1", "xxx/test2"] }, { "url": "https://pouet.com", "repositories": ["xxx/test3", "xxx/test4"] }]'
           echo ::set-output name=matrix::$JSON
   
@@ -22,5 +22,5 @@ jobs:
       matrix:
         url: ${{ fromJson(needs.init.outputs.matrix) }}
     steps:
-      - script: |
+      - run: |
           echo {{ matrix.url }}
