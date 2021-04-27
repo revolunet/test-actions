@@ -39,6 +39,10 @@ jobs:
           token: ${{ github.token }}
           repositories: "${{ steps.repositories.outputs.REPOS }}"
           output: dependabotalerts.json
+      - name: debug dependabotalerts
+        run: |
+          ls -la
+          cat dependabotalerts.json
       - uses: actions/upload-artifact@v2
         with:
           name: dependabotalerts.json
