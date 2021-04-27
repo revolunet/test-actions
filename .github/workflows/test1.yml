@@ -16,7 +16,7 @@ jobs:
         uses: "SocialGouv/dashlord-init-action@master"
       - id: init2
         run: |
-          JSON=$( yq - e dashlord.yml )
+          JSON=$( yq -j e dashlord.yml )
           echo "::set-output name=${JSON//'%'/'%25'}"
   job1:
     runs-on: ubuntu-latest
