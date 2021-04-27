@@ -37,10 +37,13 @@ jobs:
           echo ${{ fromJson(needs.init.outputs.JSON) }}
       - name: Extract repositories
         id: repositories
+        env:
+          JSON: ${{ needs.init.outputs.JSON}}
         run: |
           #wget https://github.com/mikefarah/yq/releases/download/v4.7.0/yq_linux_amd64.tar.gz -O - | tar xz && sudo mv yq_linux_amd64 /usr/bin/yq
           #REPOS=$( yq e '.urls[] | select( .url == "${{ matrix.url }}" ) | .repositories // [] | join(",") ' dashlord.yml )
-          REPOS=$( jq -nr '${{ fromJson(needs.init.outputs.JSON) }} | .urls[] | select( .url == "${{ matrix.url }}" ) | .repositories // [] | join(",")' )
+          #REPOS=$( jq -nr '${{ fromJson(needs.init.outputs.JSON) }} | .urls[] | select( .url == "${{ matrix.url }}" ) | .repositories // [] | join(",")' )
+          REPOS=$( echo $JSON | jq '.urls[] | select( .url == "${{ matrix.url }}" ) | .repositories // [] | join(",")' )
           echo $REPOS
           echo "::set-output name=REPOS::$REPOS"
       - name: debug repositories
