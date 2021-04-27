@@ -35,6 +35,7 @@ jobs:
           echo "REPOS"
           echo "${{ steps.repositories.outputs.REPOS }}"
       - uses: "MTES-MCT/dependabotalerts-action@main"
+        if: "${{ steps.repositories.outputs.REPOS }}"
         with:
           token: ${{ github.token }}
           repositories: "${{ steps.repositories.outputs.REPOS }}"
@@ -44,6 +45,7 @@ jobs:
           ls -la
           cat dependabotalerts.json
       - uses: actions/upload-artifact@v2
+        if: "${{ steps.repositories.outputs.REPOS }}"
         with:
           name: dependabotalerts.json
           path: dependabotalerts.json

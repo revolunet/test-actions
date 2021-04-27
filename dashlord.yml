@@ -4,5 +4,7 @@ urls:
     repositories:
       - socialgouv/www
       - socialgouv/sample-next-app
-  - url: https://beta.gouv.fr/
+  - url: https://beta.gouv.fr
+    repositories:
       - betagouv/beta.gouv.fr
+  - url: https://free.fr
