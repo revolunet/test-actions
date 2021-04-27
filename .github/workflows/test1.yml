@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: test
         run: |
-          echo ${{ fromJSON(needs.init.outputs.JSON) }}
+          echo ${{ fromJson(needs.init.outputs.JSON) }}
       - name: Extract repositories
         id: repositories
         run: |
