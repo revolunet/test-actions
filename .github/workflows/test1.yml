@@ -17,7 +17,7 @@ jobs:
       - id: init2
         run: |
           JSON=$( yq -j e dashlord.yml )
-          echo "::set-output name=${JSON//'%'/'%25'}"
+          echo "::set-output name=JSON::${JSON//'%'/'%25'}"
   job1:
     runs-on: ubuntu-latest
     needs: init
