@@ -41,6 +41,7 @@ jobs:
           repositories: "${{ steps.repositories.outputs.REPOS }}"
           output: dependabotalerts.json
       - name: debug dependabotalerts
+        if: "${{ steps.repositories.outputs.REPOS }}"
         run: |
           ls -la
           cat dependabotalerts.json
