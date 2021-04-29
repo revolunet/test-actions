@@ -9,7 +9,7 @@ jobs:
     outputs:
       urls: ${{ steps.init.outputs.urls }}
       urls_json: ${{ steps.init.outputs.urls_json }}
-      JSON: ${{ steps.init.outputs.json }}
+      json: ${{ steps.init.outputs.json }}
     steps:
       - uses: actions/checkout@v2
       - id: init
