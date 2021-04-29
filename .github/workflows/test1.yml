@@ -30,7 +30,7 @@ jobs:
       - name: Extract repositories
         id: repositories
         env:
-          JSON: ${{ needs.init.outputs.json}}
+          json: ${{ needs.init.outputs.json}}
         run: |
           REPOS=$( echo $json | jq '.urls[] | select( .url == "${{ matrix.url }}" ) | .repositories // [] | join(",")' )
           echo $REPOS
