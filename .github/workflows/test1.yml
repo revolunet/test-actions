@@ -32,7 +32,7 @@ jobs:
         env:
           json: ${{ needs.init.outputs.json}}
         run: |
-          REPOS=$( echo $json | jq '.urls[] | select( .url == "${{ matrix.urls.url }}" ) | .repositories // [] | join(",")' )
+          REPOS=$( echo $json | jq -r '.urls[] | select( .url == "${{ matrix.urls.url }}" ) | .repositories // [] | join(",")' )
           echo $REPOS
           echo "::set-output name=REPOS::$REPOS"
       - name: debug repositories
