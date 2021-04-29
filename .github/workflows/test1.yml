@@ -40,7 +40,7 @@ jobs:
           echo "REPOS"
           echo "${{ steps.repositories.outputs.REPOS }}"
       - uses: "MTES-MCT/dependabotalerts-action@main"
-        if: "${{ steps.repositories.outputs.REPOS }}"
+        if: ${{ steps.repositories.outputs.REPOS != "" }}
         with:
           token: ${{ github.token }}
           repositories: "${{ steps.repositories.outputs.REPOS }}"
