@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       max-parallel: 3
       matrix: 
-        url: ${{ fromJson(needs.init.outputs.urls_json) }}
+        urls: ${{ fromJson(needs.init.outputs.urls_json) }}
     steps:
       - uses: actions/checkout@v2
       - name: test
@@ -32,7 +32,7 @@ jobs:
         env:
           json: ${{ needs.init.outputs.json}}
         run: |
-          REPOS=$( echo $json | jq '.urls[] | select( .url == "${{ matrix.url }}" ) | .repositories // [] | join(",")' )
+          REPOS=$( echo $json | jq '.urls[] | select( .url == "${{ matrix.urls.url }}" ) | .repositories // [] | join(",")' )
           echo $REPOS
           echo "::set-output name=REPOS::$REPOS"
       - name: debug repositories
