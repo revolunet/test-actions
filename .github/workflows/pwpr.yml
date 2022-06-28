@@ -8,7 +8,7 @@ on:
 
 jobs:
   test1:
-    name: pwpr
+    name: pwpr-latest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v3
@@ -17,3 +17,27 @@ jobs:
       - name: Run pwpr
         run: |
           npx pwpr@latest --url https://opentermsarchive.org --locale fr-FR | grep -o "Access\w*"
+  test2:
+    name: pwpr-with-playwright-install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Run pwpr
+        run: |
+          npx playwright install
+          npx pwpr@latest --url https://opentermsarchive.org --locale fr-FR | grep -o "Access\w*"
+  
+  test3:
+    name: pwpr-default
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Run pwpr
+        run: |
+          npx pwpr --url https://opentermsarchive.org --locale fr-FR | grep -o "Access\w*"
+  
+     
