@@ -39,8 +39,21 @@ jobs:
       - name: Run pwpr
         run: |
           npx pwpr --url https://opentermsarchive.org --locale fr-FR | grep -o "Access\w*"
-    
+          
   test4:
+    name: pwpr-clear-npx-cache
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Run pwpr
+        run: |
+          npx clear-npx-cache
+          npx pwpr --url https://opentermsarchive.org --locale fr-FR | grep -o "Access\w*"
+    
+    
+  test5:
     name: pwpr-old
     runs-on: ubuntu-latest
     steps:
