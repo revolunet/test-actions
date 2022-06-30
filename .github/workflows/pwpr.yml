@@ -64,4 +64,17 @@ jobs:
         run: |
           npx pwpr@2.2.0 --url https://opentermsarchive.org --locale fr-FR | grep -o "Access\w*"
   
+  test6:
+    name: pwpr-with-clear-and-playwright-install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Run pwpr
+        run: |
+          npx clear-npx-cache
+          npx playwright install
+          npx pwpr@latest --url https://opentermsarchive.org --locale fr-FR | grep -o "Access\w*"
+  
      
