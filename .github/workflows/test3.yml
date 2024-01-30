@@ -11,5 +11,6 @@ jobs:
       - name: test
         run: |
           echo "${{ github.ref }}"
+          echo "${{ github.ref_name }}"
           echo "${{ github.base_ref }}"
           echo "${{ github.head_ref }}"
