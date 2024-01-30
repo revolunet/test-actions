@@ -1,0 +1,13 @@
+name: workflow test 3
+on:
+  workflow_dispatch:
+  push:
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    name: Prepare
+    steps:
+      - uses: actions/checkout@v3
+      - name: test
+        run: |
+          echo ${{ GITHUB_BASE_REF }}
