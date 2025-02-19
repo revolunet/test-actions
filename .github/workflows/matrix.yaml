@@ -70,7 +70,7 @@ jobs:
               fh.write(f"matrix={matrix_json}")
           EOF
           
-          python process_urls.py ${{ inputs.matrixCount }}
+          python process_urls.py ${{ inputs.matrixCount || 5 }}
 
   process-urls:
     needs: prepare-matrix
