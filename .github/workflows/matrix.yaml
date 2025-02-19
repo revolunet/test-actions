@@ -42,19 +42,26 @@ jobs:
           import base64
           import json
           import sys
+          import subprocess
           from datetime import datetime
           
           def get_b64_path(url):
               return os.path.join('./out', base64.b64encode(url.encode()).decode())
           
-          def get_file_mod_time(path):
+          def get_git_last_modified(path):
               try:
-                  t = os.path.getctime(path)
-                  print(path)
-                  print(t)
-                  return t
-              except FileNotFoundError:
-                  return float('-inf')
+                  # Get the last commit date for the file
+                  result = subprocess.run(
+                      ['git', 'log', '-1', '--format=%at', '--', path],
+                      capture_output=True,
+                      text=True
+                  )
+                  if result.stdout.strip():
+                      return float(result.stdout.strip())
+                  return float('-inf')  # File doesn't exist in git history
+              except Exception:
+                  return float('-inf')  # Error running git command
+          
           
           # Read URLs from file
           with open('urls.txt', 'r') as f:
@@ -65,7 +72,7 @@ jobs:
               urls,
               key=lambda url: (
                   os.path.exists(get_b64_path(url)),
-                  get_file_mod_time(get_b64_path(url))
+                  get_git_last_modified(get_b64_path(url))
               )
           )
           
