@@ -60,7 +60,6 @@ jobs:
           )
           
           # Take only the first N URLs (from input)
-          print(sys.argv)
           matrix_count = int(sys.argv[1])
           matrix_urls = sorted_urls[:matrix_count]
           
