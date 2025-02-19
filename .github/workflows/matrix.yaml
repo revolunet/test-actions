@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  MATRIX_MAX_COUNT: "${{ inputs.matrixCount || 3 }}"
+  MATRIX_MAX_COUNT: "${{ inputs.matrixCount || 5 }}"
 
 jobs:
   prepare-matrix:
