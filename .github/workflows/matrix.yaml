@@ -12,6 +12,13 @@ on:
         required: true
         default: '5'
 
+concurrency: 
+  group: "scans"
+  cancel-in-progress: false
+
+env:
+  MATRIX_MAX_COUNT: "${{ inputs.matrixCount || 3 }}"
+
 jobs:
   prepare-matrix:
     runs-on: ubuntu-latest
@@ -69,7 +76,7 @@ jobs:
               fh.write(f"matrix={matrix_json}")
           EOF
           
-          python process_urls.py ${{ inputs.matrixCount || 5 }}
+          python process_urls.py ${{ env.MATRIX_MAX_COUNT }}
 
   process-urls:
     needs: prepare-matrix
