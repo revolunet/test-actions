@@ -56,10 +56,12 @@ jobs:
                       capture_output=True,
                       text=True
                   )
+                  print(result)
                   if result.stdout.strip():
                       return float(result.stdout.strip())
                   return float('-inf')  # File doesn't exist in git history
               except Exception:
+                  print("error")
                   return float('-inf')  # Error running git command
           
           
