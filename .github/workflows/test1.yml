@@ -20,6 +20,7 @@ jobs:
         uses: "./.github/init-from-txt"
         with:
           cachePath: "./out"
+          count: 3
 
   scans:
     runs-on: ubuntu-latest
