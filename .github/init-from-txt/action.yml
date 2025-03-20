@@ -52,7 +52,7 @@ runs:
       shell: bash
       id: init
       env:
-        CACHE_PATH: ${{ inputs.cachePath || "./results" }}
+        CACHE_PATH: ${{ inputs.cachePath || './results' }}
         TXT_PATH: "urls.txt"
         MATRIX_MAX_COUNT: ${{ inputs.count || 10 }}
       run: |
