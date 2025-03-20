@@ -12,6 +12,10 @@ jobs:
       #json: ${{ steps.init.outputs.json }}
     steps:
       - uses: actions/checkout@v4
+      - run: |
+        ls -la
+        echo "io"
+        ls -la ..
       - id: init
         uses: "./../init-from-txt"
         with:
