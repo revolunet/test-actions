@@ -15,7 +15,7 @@ jobs:
         uses: "./../init-from-txt.yml"
         with:
           cachePath: "./out"
-          config:
+          config: |
             title: "hello"
             tools: ["dsfr", "http"]
   scans:
