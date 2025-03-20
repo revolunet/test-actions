@@ -17,7 +17,7 @@ jobs:
           echo "io"
           ls -la ..
       - id: init
-        uses: "./../init-from-txt"
+        uses: "./.github/init-from-txt"
         with:
           cachePath: "./out"
 
