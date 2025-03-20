@@ -12,7 +12,7 @@ jobs:
       #json: ${{ steps.init.outputs.json }}
     steps:
       - id: init
-        uses: "../init-from-txt"
+        uses: "../init-from-txt.yml"
         with:
           cachePath: "./out"
           config:
