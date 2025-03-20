@@ -1,9 +1,9 @@
 name: "DashLord init action"
 description: "Parse dashlord txt config files and return some urls to scan"
 inputs:
-  config:
-    description: "Default config for URLs"
-    required: true
+  # config:
+  #   description: "Default config for URLs"
+  #   required: true
   cachePath:
     description: "Where urls results are stored"
     required: false
@@ -11,7 +11,7 @@ inputs:
   count:
     description: "Max number of URLs to return"
     required: false
-    default: 10
+    default: "10"
   txtFile:
     description: "Path to the txt urls list file"
     required: false
@@ -103,9 +103,9 @@ runs:
         matrix_urls = sorted_urls[:matrix_count]
 
         # Output the matrix JSON to GITHUB_OUTPUT
-        sites_json = json.dumps([{"url": url, tool: ["dsfr", "http"]} for url in matrix_urls])
+        urls_json = json.dumps([{"url": url} for url in matrix_urls])
         with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-            fh.write(f"sites={sites_json}")
+            fh.write(f"sites={urls_json}")
         env
         EOF
 

@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Prepare
     outputs:
-      urls: ${{ steps.init.outputs.urls }}
+      sites: ${{ steps.init.outputs.sites }}
       # urls_json: ${{ steps.init.outputs.urls_json }}
       #json: ${{ steps.init.outputs.json }}
     steps:
@@ -15,9 +15,7 @@ jobs:
         uses: "../init-from-txt"
         with:
           cachePath: "./out"
-          config: |
-            title: "hello"
-            tools: ["dsfr", "http"]
+
   scans:
     runs-on: ubuntu-latest
     name: Scan
@@ -32,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - run: |
-          mkdir scans
+          echo ${{ matrix.sites.url }}
 
   # job1:
   #   runs-on: ubuntu-latest
