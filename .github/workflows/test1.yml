@@ -8,14 +8,8 @@ jobs:
     name: Prepare
     outputs:
       sites: ${{ steps.init.outputs.sites }}
-      # urls_json: ${{ steps.init.outputs.urls_json }}
-      #json: ${{ steps.init.outputs.json }}
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          ls -la
-          echo "io"
-          ls -la ..
       - id: init
         uses: "./.github/init-from-txt"
         with:
@@ -37,45 +31,3 @@ jobs:
 
       - run: |
           echo ${{ matrix.sites.url }}
-
-  # job1:
-  #   runs-on: ubuntu-latest
-  #   needs: init
-  #   strategy:
-  #     fail-fast: false
-  #     max-parallel: 3
-  #     matrix:
-  #       urls: ${{ fromJson(needs.init.outputs.urls) }}
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: test
-  #       run: |
-  #         echo ${{ fromJson(needs.init.outputs.json) }}
-  #     - name: Extract repositories
-  #       id: repositories
-  #       env:
-  #         json: ${{ needs.init.outputs.json}}
-  #       run: |
-  #         REPOS=$( echo $json | jq -r '.urls[] | select( .url == "${{ matrix.urls.url }}" ) | .repositories // [] | join(",")' )
-  #         echo $REPOS
-  #         echo "::set-output name=REPOS::$REPOS"
-  #     - name: debug repositories
-  #       run: |
-  #         echo "REPOS"
-  #         echo "${{ steps.repositories.outputs.REPOS }}"
-  #     - uses: "MTES-MCT/dependabotalerts-action@main"
-  #       if: ${{ steps.repositories.outputs.REPOS != '' }}
-  #       with:
-  #         token: ${{ github.token }}
-  #         repositories: "${{ steps.repositories.outputs.REPOS }}"
-  #         output: dependabotalerts.json
-  #     - name: debug dependabotalerts
-  #       if: "${{ steps.repositories.outputs.REPOS }}"
-  #       run: |
-  #         ls -la
-  #         cat dependabotalerts.json
-  #     - uses: actions/upload-artifact@v2
-  #       if: "${{ steps.repositories.outputs.REPOS }}"
-  #       with:
-  #         name: dependabotalerts.json
-  #         path: dependabotalerts.json
