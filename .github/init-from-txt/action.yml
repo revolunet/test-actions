@@ -106,11 +106,12 @@ runs:
         urls_json = json.dumps([{"url": url} for url in matrix_urls])
         with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
             fh.write(f"sites={urls_json}")
-        env
         EOF
 
         # todo: handle single url
         python process_urls.py ${{ env.MATRIX_MAX_COUNT }}
+
+        env
 
 # name: Process URLs
 
