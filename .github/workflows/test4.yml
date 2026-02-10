@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v9
+        uses: actions/checkout@v6
         with:
           repository: "revolunet/test-private"
-          ssh-key: "{{ secrets.PUSH_KEY }}"    
+          ssh-key: "{{ secrets.PUSH_KEY }}"
       - run: |
           ls -la
           echo $(date) > index.html
