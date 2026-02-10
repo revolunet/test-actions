@@ -1,0 +1,27 @@
+name: test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  test1:
+    name: job2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v9
+        with:
+          repository: "revolunet/test-private"
+          ssh-key: "{{ secrets.PUSH_KEY }}"    
+      - run: |
+          ls -la
+          echo $(date) > index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add private git@github.com:revolunet/test-private.git
+          git add index.html
+          git diff --staged --quiet || git commit -m "chore: update !"
+          git push private
